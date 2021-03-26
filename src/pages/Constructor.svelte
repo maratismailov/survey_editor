@@ -1,5 +1,6 @@
 <script>
   import Parsed from "../components/Parsed.svelte";
+  import Form from '../components/Form.svelte'
 
   let surveys = [];
   let survey = {
@@ -39,7 +40,6 @@
   let element_type = "";
 
   let parsed_body = [];
-  let parsed_table = [];
   let pretty_element = "";
   let pretty_survey = "";
   let form_is_active = false;
@@ -64,7 +64,6 @@
     console.log("blank", blank_element);
     console.log(element);
     survey.survey_body.push(element);
-    parsed_table = [];
     survey = survey;
     // parsed_body = new Parse(survey.survey_body);
     // parsed_body = parsed_body;
@@ -96,140 +95,15 @@
 </script>
 
 <style>
-  .form_element {
-    display: flex;
-  }
-  .form_left {
-    width: 170px;
-  }
-  .form_right {
-    flex-grow: 1;
-  }
-  .table {
-    margin: 5px;
-    margin-left: 25px;
-  }
-  .select_type {
-    display: flex;
-  }
-  .type_radio {
-    margin: 5px;
-  }
+
 </style>
 
 <Parsed survey={survey.survey_body} />
 <hr />
 
-<form on:submit|preventDefault={submit_element}>
-  <div class="form_element">
-    <div class="form_left">survey id</div>
-    <div class="form_right">
-      <input bind:value={survey.survey_id} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">survey name ru</div>
-    <div class="form_right">
-      <input bind:value={survey.name_ru} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">survey name en</div>
-    <div class="form_right">
-      <input bind:value={survey.name_en} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">survey name kg</div>
-    <div class="form_right">
-      <input bind:value={survey.name_kg} type="text" />
-    </div>
-  </div>
-</form>
+<Form survey={survey} element={element} submit_element={submit_element} column={column}/>
 <hr />
-<form on:submit|preventDefault={submit_element}>
-  <div class="form_element">
-    <div class="form_left">element id</div>
-    <div class="form_right">
-      <input bind:value={element.id} type="text" />
-    </div>
-  </div>
 
-  <div class="form_element">
-    <div class="form_left">element name ru</div>
-    <div class="form_right">
-      <input bind:value={element.name_ru} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">element name en</div>
-    <div class="form_right">
-      <input bind:value={element.name_en} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">element name kg</div>
-    <div class="form_right">
-      <input bind:value={element.name_kg} type="text" />
-    </div>
-  </div>
-
-  <div>
-    {#if element.type == 'table'}
-      <div>fields:</div>
-      <div>
-        {#each parsed_table as table_element}
-          <div class="table">
-            {@html table_element}
-          </div>
-        {/each}
-        <input bind:value={column.id} placeholder="name" type="text" />
-        <div id="select_type" class="select_type">
-          <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'text'} />
-            text
-          </label>
-          <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'number'} />
-            number
-          </label>
-          <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'select'} />
-            select
-          </label>
-          <button type="button" on:click={add_column}>add column</button>
-          <button type="submit" style="margin-left: 5px">Submit</button>
-        </div>
-      </div>
-    {/if}
-  </div>
-  {#if element.type != 'table'}
-    <div class="select_type">
-      <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'text'} />
-        text
-      </label>
-      <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'number'} />
-        number
-      </label>
-      <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'select'} />
-        select
-      </label>
-      <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'table'} />
-        table
-      </label>
-      <button type="submit">Submit</button>
-    </div>
-  {/if}
-</form>
 <button on:click={show_element}>show element</button>
 <button on:click={show_survey}>show survey</button>
 <button on:click={save_survey}>save survey</button>

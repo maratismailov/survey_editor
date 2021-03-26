@@ -1,0 +1,69 @@
+{
+    "survey_id": "survey_id",
+    "name_ru": "",
+    "name_en": "",
+    "name_kg": "",
+    "survey_body": [
+        {
+            "id": "table",
+            "name_ru": "",
+            "name_en": "",
+            "name_kg": "",
+            "type": "table",
+            "value": "",
+            "fields": [
+                {
+                    "id": "table_text",
+                    "name_ru": "",
+                    "name_en": "",
+                    "name_kg": "",
+                    "type": "text",
+                    "value": ""
+                },
+                {
+                    "id": "table_num",
+                    "name_ru": "",
+                    "name_en": "",
+                    "name_kg": "",
+                    "type": "number",
+                    "value": ""
+                },
+                {
+                    "id": "table_select",
+                    "name_ru": "",
+                    "name_en": "",
+                    "name_kg": "",
+                    "type": "select",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "num",
+            "name_ru": "",
+            "name_en": "",
+            "name_kg": "",
+            "type": "number",
+            "value": "",
+            "fields": []
+        },
+        {
+            "id": "text",
+            "name_ru": "",
+            "name_en": "",
+            "name_kg": "",
+            "type": "text",
+            "value": "",
+            "fields": []
+        },
+        {
+            "id": "select",
+            "name_ru": "",
+            "name_en": "",
+            "name_kg": "",
+            "type": "select",
+            "value": "",
+            "fields": []
+        }
+    ]
+}

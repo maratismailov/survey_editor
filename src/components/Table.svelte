@@ -8,12 +8,14 @@
 
 <style>
   .table {
-    margin-left: 25px
+    margin-left: 25px;
   }
 </style>
 
 <div class="table">
   {#each element.fields as element}
+    <div>{element.id}</div>
+    <div>{element.name_ru}</div>
     {#if element.type === 'text'}
       <TextInput {element} />
     {:else if element.type === 'number'}
