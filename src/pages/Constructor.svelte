@@ -1,6 +1,6 @@
 <script>
   import Parsed from "../components/Parsed.svelte";
-  import Form from '../components/Form.svelte'
+  import Form from "../components/Form.svelte";
 
   let surveys = [];
   let survey = {
@@ -40,10 +40,8 @@
   let element_type = "";
 
   let parsed_body = [];
-  let pretty_element = "";
-  let pretty_survey = "";
-  let form_is_active = false;
-  let table_fields = [];
+  let pretty_element = null;
+  let pretty_survey = null;
   let types = ["choose type", "text", "number", "select", "table"];
   if (
     localStorage.getItem("survey") !== "" &&
@@ -57,25 +55,19 @@
     localStorage.setItem("surveys", "[]");
     surveys = JSON.parse(localStorage.getItem("surveys"));
   }
-  let add_element;
-  const survey_name = "nana";
 
-  const submit_element = () => {
-    console.log("blank", blank_element);
-    console.log(element);
-    survey.survey_body.push(element);
-    survey = survey;
-    // parsed_body = new Parse(survey.survey_body);
-    // parsed_body = parsed_body;
-    element = { ...blank_element };
-    element.fields = [];
-    column = { ...blank_column };
-  };
   const show_element = () => {
     pretty_element = JSON.stringify(element, undefined, 2);
   };
+  const hide_element = () => {
+    pretty_element = null;
+  };
   const show_survey = () => {
     pretty_survey = JSON.stringify(survey, undefined, 2);
+  };
+
+  const hide_survey = () => {
+    pretty_survey = null;
   };
   const save_survey_template = () => {
     localStorage.setItem("survey", JSON.stringify(survey));
@@ -87,25 +79,23 @@
   const delete_survey = () => {
     localStorage.setItem("survey", "");
   };
-  const add_column = () => {
-    element.fields.push(column);
-    column = { ...blank_column };
-    document.getElementById("select_type").selectedIndex = 0;
-  };
 </script>
 
-<style>
-
-</style>
-
-<Parsed survey={survey.survey_body} />
+<Form {survey} {element} {column} />
 <hr />
 
-<Form survey={survey} element={element} submit_element={submit_element} column={column}/>
-<hr />
-
-<button on:click={show_element}>show element</button>
-<button on:click={show_survey}>show survey</button>
+{#if !pretty_element}
+  <button on:click={show_element}>show element</button>
+{/if}
+{#if pretty_element}
+  <button on:click={hide_element}>hide element</button>
+{/if}
+{#if !pretty_survey}
+  <button on:click={show_survey}>show survey</button>
+{/if}
+{#if pretty_survey}
+  <button on:click={hide_survey}>hide survey</button>
+{/if}
 <button on:click={save_survey}>save survey</button>
 <button on:click={save_survey_template}>save survey template</button>
 <button on:click={delete_survey}>delete survey</button>
@@ -117,3 +107,7 @@
 {#if pretty_survey}
   <pre>{pretty_survey}</pre>
 {/if}
+
+<hr />
+
+<Parsed survey={survey.survey_body} />

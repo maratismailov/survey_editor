@@ -2,9 +2,23 @@
   export let survey;
   export let element;
   export let column;
-  export let submit_element;
-</script>
 
+  const submit_element = () => {
+    console.log("blank", blank_element);
+    console.log(element);
+    survey.survey_body.push(element);
+    survey = survey;
+    element = { ...blank_element };
+    element.fields = [];
+    column = { ...blank_column };
+  };
+
+  const add_column = () => {
+    element.fields.push(column);
+    column = { ...blank_column };
+    document.getElementById("select_type").selectedIndex = 0;
+  };
+</script>
 
 <style>
   .form_element {
