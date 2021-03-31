@@ -2,6 +2,8 @@
   export let survey;
   export let element;
   export let column;
+  export let blank_element;
+  export let blank_column;
 
   const submit_element = () => {
     console.log("blank", blank_element);
@@ -19,24 +21,6 @@
     document.getElementById("select_type").selectedIndex = 0;
   };
 </script>
-
-<style>
-  .form_element {
-    display: flex;
-  }
-  .form_left {
-    width: 170px;
-  }
-  .form_right {
-    flex-grow: 1;
-  }
-  .select_type {
-    display: flex;
-  }
-  .type_radio {
-    margin: 5px;
-  }
-</style>
 
 <form on:submit|preventDefault={submit_element}>
   <div class="form_element">
@@ -98,21 +82,21 @@
   </div>
 
   <div>
-    {#if element.type == 'table'}
+    {#if element.type == "table"}
       <div>fields:</div>
       <div>
         <input bind:value={column.id} placeholder="name" type="text" />
         <div id="select_type" class="select_type">
           <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'text'} />
+            <input type="radio" bind:group={column.type} value={"text"} />
             text
           </label>
           <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'number'} />
+            <input type="radio" bind:group={column.type} value={"number"} />
             number
           </label>
           <label class="type_radio">
-            <input type="radio" bind:group={column.type} value={'select'} />
+            <input type="radio" bind:group={column.type} value={"select"} />
             select
           </label>
           <button type="button" on:click={add_column}>add column</button>
@@ -120,26 +104,68 @@
         </div>
       </div>
     {/if}
+    {#if element.type == "select"}
+      <div>select:</div>
+      <div class="form_element">
+        <div class="form_left">table name</div>
+        <div class="form_right">
+          <input bind:value={element.select.table_name} type="text" />
+        </div>
+      </div>
+
+      <div class="form_element">
+        <div class="form_left">name column</div>
+        <div class="form_right">
+          <input bind:value={element.select.name_column} type="text" />
+        </div>
+      </div>
+
+      <div class="form_element">
+        <div class="form_left">id column</div>
+        <div class="form_right">
+          <input bind:value={element.select.id_column} type="text" />
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    {/if}
   </div>
-  {#if element.type != 'table'}
+  {#if element.type != "table" && element.type != "select"}
     <div class="select_type">
       <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'text'} />
+        <input type="radio" bind:group={element.type} value={"text"} />
         text
       </label>
       <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'number'} />
+        <input type="radio" bind:group={element.type} value={"number"} />
         number
       </label>
       <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'select'} />
+        <input type="radio" bind:group={element.type} value={"select"} />
         select
       </label>
       <label class="type_radio">
-        <input type="radio" bind:group={element.type} value={'table'} />
+        <input type="radio" bind:group={element.type} value={"table"} />
         table
       </label>
       <button type="submit">Submit</button>
     </div>
   {/if}
 </form>
+
+<style>
+  .form_element {
+    display: flex;
+  }
+  .form_left {
+    width: 170px;
+  }
+  .form_right {
+    flex-grow: 1;
+  }
+  .select_type {
+    display: flex;
+  }
+  .type_radio {
+    margin: 5px;
+  }
+</style>

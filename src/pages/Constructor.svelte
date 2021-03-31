@@ -17,7 +17,12 @@
     name_kg: "",
     type: "",
     value: "",
-    fields: []
+    fields: [],
+    select: {
+      table_name: "",
+      name_column_name: "",
+      id_column_name: "",
+    }
   };
   let element = { ...blank_element };
 
@@ -81,7 +86,7 @@
   };
 </script>
 
-<Form {survey} {element} {column} />
+<Form {survey} {element} {column} {blank_element} {blank_column}/>
 <hr />
 
 {#if !pretty_element}
