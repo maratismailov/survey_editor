@@ -1,7 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import axios from "redaxios";
-import { dataset_dev } from 'svelte/internal';
 
   export let element;
   let result = null
@@ -9,9 +7,10 @@ import { dataset_dev } from 'svelte/internal';
   const table_name = element.select.table_name;
   const name_column = element.select.name_column;
   const id_column = element.select.id_column;
+  const where_clause = element.select.where_clause
 
   const query =
-    '{  selectList(tableName:"' + table_name + '", nameColumn:"' + name_column + '", idColumn: "' + id_column +'") {    id    nameRu    nameEn    nameKg  }}';
+    '{  selectList(tableName:"' + table_name + '", nameColumn:"' + name_column + '", idColumn: "' + id_column +'"whereClause: "' + where_clause + '") {    id    name }}';
 
   onMount(async () => {
     const res = await fetch(`http://192.168.20.35:8000/?query=` + query);
@@ -20,14 +19,12 @@ import { dataset_dev } from 'svelte/internal';
   });
 
   let selected;
-
-  const options = ["option1", "option2"];
 </script>
 
 <select bind:value={element.value}>
   {#if result}
   {#each result.data.selectList as option}
-  <option>{option.nameRu}</option>
+  <option>{option.name}</option>
   {/each}
   {/if}
 </select>

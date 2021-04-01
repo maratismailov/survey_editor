@@ -5,24 +5,21 @@
   let surveys = [];
   let survey = {
     survey_id: "",
-    name_ru: "",
-    name_en: "",
-    name_kg: "",
-    survey_body: []
+    name: "",
+    survey_body: [],
   };
   const blank_element = {
     id: "",
-    name_ru: "",
-    name_en: "",
-    name_kg: "",
+    name: "",
     type: "",
     value: "",
     fields: [],
     select: {
       table_name: "",
-      name_column_name: "",
-      id_column_name: "",
-    }
+      name_column: "",
+      where_clause: "",
+      id_column: "",
+    },
   };
   let element = { ...blank_element };
 
@@ -32,7 +29,7 @@
     name_en: "",
     name_kg: "",
     type: "",
-    value: ""
+    value: "",
   };
   let column = { ...blank_column };
 
@@ -74,8 +71,27 @@
   const hide_survey = () => {
     pretty_survey = null;
   };
-  const save_survey_template = () => {
+  const save_survey_template = async () => {
     localStorage.setItem("survey", JSON.stringify(survey));
+    // const res = await fetch(
+    //   `http://192.168.20.35:8000/save_survey_template?survey_id=` +
+    //     survey.survey_id
+    // );
+    try {
+      await fetch(
+        `http://192.168.20.35:8000/save_survey_template?id=` +
+          survey.survey_id,
+        {
+          method: "POST", // или 'PUT'
+          body: JSON.stringify(survey),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
   };
   const save_survey = () => {
     surveys.push(survey);
@@ -86,7 +102,7 @@
   };
 </script>
 
-<Form {survey} {element} {column} {blank_element} {blank_column}/>
+<Form {survey} {element} {column} {blank_element} {blank_column} />
 <hr />
 
 {#if !pretty_element}

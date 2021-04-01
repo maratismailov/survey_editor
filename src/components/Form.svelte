@@ -1,4 +1,6 @@
 <script>
+  import SelectForm from "./SelectForm.svelte";
+
   export let survey;
   export let element;
   export let column;
@@ -31,25 +33,12 @@
   </div>
 
   <div class="form_element">
-    <div class="form_left">survey name ru</div>
+    <div class="form_left">survey name</div>
     <div class="form_right">
-      <input bind:value={survey.name_ru} type="text" />
+      <input bind:value={survey.name} type="text" />
     </div>
   </div>
 
-  <div class="form_element">
-    <div class="form_left">survey name en</div>
-    <div class="form_right">
-      <input bind:value={survey.name_en} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">survey name kg</div>
-    <div class="form_right">
-      <input bind:value={survey.name_kg} type="text" />
-    </div>
-  </div>
 </form>
 <hr />
 <form on:submit|preventDefault={submit_element}>
@@ -61,23 +50,9 @@
   </div>
 
   <div class="form_element">
-    <div class="form_left">element name ru</div>
+    <div class="form_left">element name</div>
     <div class="form_right">
-      <input bind:value={element.name_ru} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">element name en</div>
-    <div class="form_right">
-      <input bind:value={element.name_en} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">element name kg</div>
-    <div class="form_right">
-      <input bind:value={element.name_kg} type="text" />
+      <input bind:value={element.name} type="text" />
     </div>
   </div>
 
@@ -105,28 +80,7 @@
       </div>
     {/if}
     {#if element.type == "select"}
-      <div>select:</div>
-      <div class="form_element">
-        <div class="form_left">table name</div>
-        <div class="form_right">
-          <input bind:value={element.select.table_name} type="text" />
-        </div>
-      </div>
-
-      <div class="form_element">
-        <div class="form_left">name column</div>
-        <div class="form_right">
-          <input bind:value={element.select.name_column} type="text" />
-        </div>
-      </div>
-
-      <div class="form_element">
-        <div class="form_left">id column</div>
-        <div class="form_right">
-          <input bind:value={element.select.id_column} type="text" />
-        </div>
-      </div>
-      <button type="submit">Submit</button>
+      <SelectForm {submit_element} {element}/>
     {/if}
   </div>
   {#if element.type != "table" && element.type != "select"}
