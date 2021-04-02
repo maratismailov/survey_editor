@@ -7,17 +7,23 @@
   export let survey;
 </script>
 
-{#each survey as element}
-  <div>{element.id}</div>
-  <div>{element.name}</div>
-  {#if element.type === 'text'}
-    <TextInput {element} />
-  {:else if element.type === 'number'}
-    <NumberInput {element} />
-  {:else if element.type === 'select'}
-    <!-- <input bind:value={element.value} type="number" /> -->
-    <SelectInput {element} />
-  {:else if element.type === 'table'}
-    <Table {element} />
+<div class={$$props.class}>
+  parsed
+  {#if survey}
+    {#each survey as element}
+      <div>{element.id}</div>
+      <div>{element.name}</div>
+      {#if element.type === "text"}
+        <TextInput {element} />
+      {:else if element.type === "number"}
+        <NumberInput {element} />
+      {:else if element.type === "select"}
+        <!-- <input bind:value={element.value} type="number" /> -->
+        <SelectInput {element} />
+      {:else if element.type === "table"}
+        <Table {element} />
+      {/if}
+    {/each}
   {/if}
-{/each}
+</div>
+

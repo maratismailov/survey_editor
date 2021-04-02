@@ -15,7 +15,6 @@
   onMount(async () => {
     const res = await fetch(`http://192.168.20.35:8000/?query=` + query);
     result = await res.json();
-    console.log(result)
   });
 
   let selected;

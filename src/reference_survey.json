@@ -1,69 +1,32 @@
 {
-    "survey_id": "survey_id",
-    "name_ru": "",
-    "name_en": "",
-    "name_kg": "",
+    "survey_id": "second_id",
+    "name": "второй шаблон",
     "survey_body": [
         {
-            "id": "table",
-            "name_ru": "",
-            "name_en": "",
-            "name_kg": "",
-            "type": "table",
-            "value": "",
-            "fields": [
-                {
-                    "id": "table_text",
-                    "name_ru": "",
-                    "name_en": "",
-                    "name_kg": "",
-                    "type": "text",
-                    "value": ""
-                },
-                {
-                    "id": "table_num",
-                    "name_ru": "",
-                    "name_en": "",
-                    "name_kg": "",
-                    "type": "number",
-                    "value": ""
-                },
-                {
-                    "id": "table_select",
-                    "name_ru": "",
-                    "name_en": "",
-                    "name_kg": "",
-                    "type": "select",
-                    "value": ""
-                }
-            ]
-        },
-        {
-            "id": "num",
-            "name_ru": "",
-            "name_en": "",
-            "name_kg": "",
-            "type": "number",
-            "value": "",
-            "fields": []
-        },
-        {
-            "id": "text",
-            "name_ru": "",
-            "name_en": "",
-            "name_kg": "",
-            "type": "text",
-            "value": "",
-            "fields": []
-        },
-        {
-            "id": "select",
-            "name_ru": "",
-            "name_en": "",
-            "name_kg": "",
+            "id": "woodgroup 3",
+            "name": "группа 3",
             "type": "select",
             "value": "",
-            "fields": []
+            "fields": [],
+            "select": {
+                "table_name": "woodspecies",
+                "name_column": "woodname_ru",
+                "where_clause": "where woodgroup_id = 3",
+                "id_column": "woodspecies_id"
+            }
+        },
+        {
+            "id": "woodgroup 2",
+            "name": "группа 2",
+            "type": "select",
+            "value": "",
+            "fields": [],
+            "select": {
+                "table_name": "woodspecies",
+                "name_column": "woodname_ru",
+                "where_clause": "where woodgroup_id = 2",
+                "id_column": "woodspecies_id"
+            }
         }
     ]
 }
