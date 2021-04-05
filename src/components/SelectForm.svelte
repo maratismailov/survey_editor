@@ -3,7 +3,6 @@
     export let submit_element;
 </script>
 
-<hr />
 <form on:submit|preventDefault={submit_element}>
     <div>
         <div>select:</div>

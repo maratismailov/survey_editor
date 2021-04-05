@@ -27,6 +27,14 @@
                 "where_clause": "where woodgroup_id = 2",
                 "id_column": "woodspecies_id"
             }
+        },
+        {
+            "id": "text",
+            "name": "text input",
+            "type": "text",
+            "value": "",
+            "fields": [],
+            "select": {}
         }
     ]
 }

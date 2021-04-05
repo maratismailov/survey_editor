@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const survey = writable(0);
+export const store_survey = writable(0);
+export const store_current_element = writable(0)

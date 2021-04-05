@@ -1,14 +1,14 @@
 <script>
   import Form from "../components/Form.svelte";
 
-  import { survey } from "../stores.js";
+  import { store_survey } from "../stores.js";
 
-  let current_template;
+  let survey;
   let is_show_survey = false
   let is_show_element = false
 
-  const unsubscribe = survey.subscribe((value) => {
-    current_template = value;
+  const unsubscribe = store_survey.subscribe((value) => {
+    survey = value;
   });
 
   let surveys = [];
@@ -17,20 +17,7 @@
   //   name: "",
   //   survey_body: [],
   // };
-  const blank_element = {
-    id: "",
-    name: "",
-    type: "",
-    value: "",
-    fields: [],
-    select: {
-      table_name: "",
-      name_column: "",
-      where_clause: "",
-      id_column: "",
-    },
-  };
-  let element = { ...blank_element };
+
 
   const blank_column = {
     id: "",
@@ -99,8 +86,7 @@
 </script>
 
 <div class={$$props.class}>
-  <Form {survey} {element} {column} {blank_element} {blank_column} />
-  <hr />
+  <Form {survey} {column} {blank_column} />
 
   {#if !is_show_element}
     <button on:click={() => is_show_element = true}>show element</button>
@@ -118,11 +104,11 @@
   <button on:click={save_survey_template}>save survey template</button>
   <!-- <button on:click={delete_survey}>delete survey</button> -->
 
-  {#if is_show_element}
+  <!-- {#if is_show_element}
     <pre>{JSON.stringify(element, undefined, 2)}</pre>
-  {/if}
+  {/if} -->
   {#if is_show_survey}
-  <pre>{JSON.stringify(current_template, undefined, 2)}</pre>
+  <pre>{JSON.stringify(survey, undefined, 2)}</pre>
   <hr />
   {/if}
 
