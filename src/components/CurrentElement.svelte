@@ -5,6 +5,7 @@
 
     export let element;
     export let column;
+    export let blank_element
 
     const unsubscribe = store_current_element.subscribe((value) => {
         element = value;

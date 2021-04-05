@@ -6,19 +6,7 @@
 
     export let url;
     let templates_list;
-    const blank_element = {
-        id: "",
-        name: "",
-        type: "",
-        value: "",
-        fields: [],
-        select: {
-            table_name: "",
-            name_column: "",
-            where_clause: "",
-            id_column: "",
-        },
-    };
+
     onMount(async () => {
         const res = await fetch(url + `/get_templates_list`);
         const result = await res.json();
@@ -28,7 +16,7 @@
         const res = await fetch(url + `/get_template_by_id?id=` + id);
         const result = await res.json();
         store_survey.set(JSON.parse(result).survey);
-        store_current_element.set(blank_element);
+        store_current_element.set(null);
     };
 </script>
 

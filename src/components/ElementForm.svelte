@@ -3,11 +3,11 @@
 
     export let element;
 
-    const set_current_template = () => {
+    const set_current_element = () => {
         store_current_element.set(element)
     };
 </script>
 
-<div on:click={set_current_template}>
+<div on:click={set_current_element}>
     {element.id}
 </div>
