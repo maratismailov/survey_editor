@@ -1,25 +1,42 @@
 <script>
     import SelectForm from "../components/SelectForm.svelte";
 
-    import { store_current_element } from "../stores.js";
+    import {
+        store_current_element,
+        store_blank_element,
+        store_survey,
+    } from "../stores.js";
 
     export let element;
     export let column;
-    export let blank_element
+
+    let blank_element;
+    let survey;
 
     const unsubscribe = store_current_element.subscribe((value) => {
         element = value;
     });
+    const unsubscribe2 = store_blank_element.subscribe((value) => {
+        blank_element = value;
+    });
+
+    const unsubscribe3 = store_survey.subscribe((value) => {
+        survey = value;
+    });
+
+    const create_field = () => {
+        element = {...blank_element}
+    };
 
     const submit_element = () => {
-    console.log("blank", blank_element);
-    console.log(element);
-    survey.survey_body.push(element);
-    survey = survey;
-    element = { ...blank_element };
-    element.fields = [];
-    column = { ...blank_column };
-  };
+        console.log("blank", blank_element);
+        console.log(element);
+        survey.survey_body.push(element);
+        survey = survey;
+        element = { ...blank_element };
+        element.fields = [];
+        // column = { ...blank_column };
+    };
 </script>
 
 {#if element}
@@ -85,44 +102,37 @@
                 <SelectForm {submit_element} {element} />
             {/if}
         </div>
-        {#if element.type == ""}
-            <div class="select_type">
-                <label class="type_radio">
-                    <input
-                        type="radio"
-                        bind:group={element.type}
-                        value={"text"}
-                    />
-                    text
-                </label>
-                <label class="type_radio">
-                    <input
-                        type="radio"
-                        bind:group={element.type}
-                        value={"number"}
-                    />
-                    number
-                </label>
-                <label class="type_radio">
-                    <input
-                        type="radio"
-                        bind:group={element.type}
-                        value={"select"}
-                    />
-                    select
-                </label>
-                <label class="type_radio">
-                    <input
-                        type="radio"
-                        bind:group={element.type}
-                        value={"table"}
-                    />
-                    table
-                </label>
-                <button type="submit">Submit</button>
-            </div>
-        {/if}
+        <div class="select_type">
+            <label class="type_radio">
+                <input type="radio" bind:group={element.type} value={"text"} />
+                text
+            </label>
+            <label class="type_radio">
+                <input
+                    type="radio"
+                    bind:group={element.type}
+                    value={"number"}
+                />
+                number
+            </label>
+            <label class="type_radio">
+                <input
+                    type="radio"
+                    bind:group={element.type}
+                    value={"select"}
+                />
+                select
+            </label>
+            <label class="type_radio">
+                <input type="radio" bind:group={element.type} value={"table"} />
+                table
+            </label>
+            <button type="submit">Submit</button>
+        </div>
     </form>
+{/if}
+{#if survey && !element}
+    <button on:click={create_field}>create field</button>
 {/if}
 
 <style>

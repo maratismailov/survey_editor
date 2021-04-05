@@ -130,8 +130,9 @@
         <hr />
       {/if}
     </div>
-
-    <CurrentElement {blank_element}/>
+    <div>
+      <CurrentElement />
+    </div>
   </div>
 </div>
 
