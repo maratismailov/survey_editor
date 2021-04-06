@@ -1,42 +1,17 @@
 <script>
-    import SelectForm from "../components/SelectForm.svelte";
-    import TableForm from "../components/TableForm.svelte";
+    import SelectForm from "./SelectForm.svelte";
 
-    import {
-        store_current_element,
-        store_blank_element,
-        store_survey,
-    } from "../stores.js";
+    export let element;
+    export let blank_element;
 
-    let element;
-
-    let blank_element;
-    let survey;
-
-    const unsubscribe = store_current_element.subscribe((value) => {
-        element = value;
-    });
-    const unsubscribe2 = store_blank_element.subscribe((value) => {
-        blank_element = value;
-    });
-
-    const unsubscribe3 = store_survey.subscribe((value) => {
-        survey = value;
-    });
-
-    // const submit_element = () => {
-    //     console.log("blank", blank_element);
-    //     console.log(element);
-    //     survey.survey_body.push(element);
-    //     survey = survey;
-    //     element = { ...blank_element };
-    //     element.fields = [];
-    //     // column = { ...blank_column };
-    // };
+    const add_column = () => {
+        element.fields = [...element.fields, {...blank_element}];
+    };
 </script>
 
-{#if element}
-    <!-- <form on:submit|preventDefault=> -->
+<div>fields:</div>
+<!-- {#if element.fields} -->
+{#each element.fields as element}
     <div class="form_element">
         <div class="form_left">element id</div>
         <div class="form_right">
@@ -52,9 +27,6 @@
     </div>
 
     <div>
-        {#if element.type == "table"}
-            <TableForm {element} {blank_element}/>
-        {/if}
         {#if element.type == "select"}
             <SelectForm {element} />
         {/if}
@@ -72,14 +44,13 @@
             <input type="radio" bind:group={element.type} value={"select"} />
             select
         </label>
-        <label class="type_radio">
-            <input type="radio" bind:group={element.type} value={"table"} />
-            table
-        </label>
         <!-- <button type="submit">Submit</button> -->
     </div>
+    <hr />
     <!-- </form> -->
-{/if}
+{/each}
+<!-- {/if} -->
+<button type="button" on:click={add_column}>add column</button>
 
 <style>
     .form_element {
@@ -93,8 +64,5 @@
     }
     .select_type {
         display: flex;
-    }
-    .type_radio {
-        margin: 5px;
     }
 </style>

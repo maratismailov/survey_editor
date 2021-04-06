@@ -1,9 +1,7 @@
 <script>
     export let element;
-    export let submit_element;
 </script>
 
-<form on:submit|preventDefault={submit_element}>
     <div>
         <div>select:</div>
         <div class="form_element">
@@ -33,10 +31,7 @@
                 <input bind:value={element.select.where_clause} type="text" />
             </div>
         </div>
-
-        <button type="submit">Submit</button>
     </div>
-</form>
 
 <style>
     .form_element {

@@ -5,22 +5,11 @@
   import { store_blank_element, store_survey } from "../stores.js";
   import { store_current_element } from "../stores.js";
 
-  let survey;
   let is_show_survey = false;
   let is_show_element = false;
 
-  const unsubscribe = store_survey.subscribe((value) => {
-    survey = value;
-  });
-
-  let surveys = [];
-  // export let survey = {
-  //   survey_id: "",
-  //   name: "",
-  //   survey_body: [],
-  // };
   const blank_element = {
-    id: "",
+    id: "new field",
     name: "",
     type: "",
     value: "",
@@ -32,6 +21,36 @@
       id_column: "",
     },
   };
+
+  const blank_survey = {
+    name: "",
+    survey_id: "",
+    survey_body: []
+  }
+
+  let survey = {...blank_survey}
+
+  store_survey.set(survey)
+
+  const unsubscribe = store_survey.subscribe((value) => {
+    survey = value;
+  });
+
+  const add_field = () => {
+    survey.survey_body.push({...blank_element})
+    console.log(blank_element)
+    store_survey.set(survey)
+  }
+
+  let surveys = [];
+  // export let survey = {
+  //   survey_id: "",
+  //   name: "",
+  //   survey_body: [],
+  // };
+
+
+
   store_blank_element.set(blank_element);
 
   let element = { ...blank_element };
@@ -46,36 +65,7 @@
   };
   let column = { ...blank_column };
 
-  let column_types = ["choose type", "text", "number", "select"];
-  let table_form = false;
-  let type_is_text = false;
-  let type_is_number = false;
-  let type_is_select = false;
-  let type_is_table = false;
-  let element_type = "";
 
-  let parsed_body = [];
-  let pretty_element = null;
-  let types = ["choose type", "text", "number", "select", "table"];
-  // if (
-  //   localStorage.getItem("survey") !== "" &&
-  //   localStorage.getItem("survey") !== null
-  // ) {
-  //   survey = JSON.parse(localStorage.getItem("survey"));
-  // } else {
-  //   survey = survey;
-  // }
-  if (localStorage.getItem("surveys") === null) {
-    localStorage.setItem("surveys", "[]");
-    surveys = JSON.parse(localStorage.getItem("surveys"));
-  }
-
-  const show_element = () => {
-    pretty_element = JSON.stringify(element, undefined, 2);
-  };
-  const hide_element = () => {
-    pretty_element = null;
-  };
 
   const save_survey_template = async () => {
     try {
@@ -97,15 +87,14 @@
     surveys.push(survey);
     localStorage.setItem("surveys", JSON.stringify(surveys));
   };
-  // const delete_survey = () => {
-  //   localStorage.setItem("survey", "");
-  // };
+
 </script>
 
 <div>
   <div class="grid-container">
     <div>
-      <Form {survey} {element} {column} {blank_element} {blank_column} />
+      <Form {survey} {element} {column} {blank_column} />
+      <button on:click={add_field}>add field</button>
       {#if !is_show_element}
         <button on:click={() => (is_show_element = true)}>show element</button>
       {/if}
