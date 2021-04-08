@@ -8,7 +8,7 @@
     url = "http://192.168.20.35:8000";
   }
   else {
-    url = location.host + '/survey-editor'
+    url = 'https://' + location.host + '/survey-editor'
     console.log(url)
   }
 
