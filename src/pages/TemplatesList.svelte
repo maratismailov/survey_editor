@@ -9,12 +9,15 @@
 
     onMount(async () => {
         console.log('url', url)
-        const res = await fetch(url + `/get_templates_list`);
+        let server = url + `/get_templates_list`
+        console.log(server)
+        const res = await fetch(server);
         const result = await res.json();
         templates_list = JSON.parse(result);
     });
     const get_survey_by_id = async (id) => {
-        const res = await fetch(url + `/get_template_by_id?id=` + id);
+        let server = url + `/get_template_by_id?id=` + id
+        const res = await fetch(server);
         const result = await res.json();
         store_survey.set(JSON.parse(result).survey);
         store_current_element.set(null);
