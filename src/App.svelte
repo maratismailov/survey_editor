@@ -8,11 +8,11 @@
     url = "http://192.168.20.35:8000";
   }
   else {
-    url = location.host + '/survey-editor/'
+    url = location.host + 'survey-editor/'
   }
 
 
-  console.log(location.hostname)
+  console.log(location.host)
 </script>
 
 <div class="grid-container">
