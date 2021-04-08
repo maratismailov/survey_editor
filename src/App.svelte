@@ -2,8 +2,17 @@
   import Editor from "./pages/Editor.svelte";
   import TemplatesList from "./pages/TemplatesList.svelte";
   // import { store_survey } from './stores.js';
+  let url = "http://192.168.20.35:8000";
 
-  const url = "http://192.168.20.35:8000";
+  if (location.hostname == 'localhost') {
+    url = "http://192.168.20.35:8000";
+  }
+  else {
+    url = '/survey-editor/'
+  }
+
+
+  console.log(location.hostname)
 </script>
 
 <div class="grid-container">
