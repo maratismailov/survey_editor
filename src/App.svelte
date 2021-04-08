@@ -8,7 +8,7 @@
     url = "http://192.168.20.35:8000";
   }
   else {
-    url = '/survey-editor/'
+    url = location.hostname + '/survey-editor/'
   }
 
 
