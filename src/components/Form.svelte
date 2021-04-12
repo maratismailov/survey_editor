@@ -21,8 +21,8 @@
 <hr />
 
 {#if survey}
-  {#each survey.survey_body as element}
-    <ElementForm {element} />
+  {#each survey.survey_body as element, index}
+    <ElementForm {element} {index} />
     <hr />
   {/each}
 {/if}

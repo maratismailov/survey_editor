@@ -8,9 +8,7 @@
     let templates_list;
 
     onMount(async () => {
-        console.log('url', url)
         let server = url + `/get_templates_list`
-        console.log(server)
         const res = await fetch(server);
         const result = await res.json();
         templates_list = JSON.parse(result);
