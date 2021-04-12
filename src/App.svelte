@@ -28,7 +28,7 @@
 <div class="grid-container">
   <TemplatesList {url} />
 
-  <Editor />
+  <Editor {url}/>
 </div>
 
 <style>

@@ -5,6 +5,8 @@
   import { store_blank_element, store_survey, store_dictionary } from "../stores.js";
   import { store_current_element } from "../stores.js";
 
+  export let url
+
   let is_show_survey = false;
   let is_show_element = false;
   let dictionary
@@ -74,7 +76,7 @@
   const save_survey_template = async () => {
     try {
       await fetch(
-        `http://192.168.20.35:8000/save_survey_template?id=` + survey.survey_id,
+        url + `/save_survey_template?id=` + survey.survey_id,
         {
           method: "POST", // или 'PUT'
           body: JSON.stringify(survey),
