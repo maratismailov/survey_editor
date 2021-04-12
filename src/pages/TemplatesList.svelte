@@ -1,8 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    import { store_survey } from "../stores.js";
-    import { store_current_element } from "../stores.js";
+    import { store_current_element, store_survey } from "../stores.js";
 
     export let url;
     let templates_list;
@@ -20,6 +19,7 @@
         store_survey.set(JSON.parse(result).survey);
         store_current_element.set(null);
     };
+
 </script>
 
 <div>

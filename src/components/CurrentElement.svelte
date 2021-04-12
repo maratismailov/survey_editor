@@ -7,13 +7,14 @@
         store_blank_element,
         store_survey,
         store_current_index,
+        store_dictionary,
     } from "../stores.js";
 
     let element;
-
     let blank_element;
     let global_index;
     let survey;
+    let dictionary
 
     const unsubscribe = store_current_element.subscribe((value) => {
         element = value;
@@ -28,6 +29,10 @@
 
     const unsubscribe5 = store_current_index.subscribe((value) => {
         global_index = value;
+    });
+
+    const unsubscribe6 = store_dictionary.subscribe((value) => {
+        dictionary = value;
     });
 
     const move = (array, index, delta) => {
@@ -60,14 +65,14 @@
 {#if element}
     <!-- <form on:submit|preventDefault=> -->
     <div class="form_element">
-        <div class="form_left">element id</div>
+        <div class="form_left">{dictionary.element_id}</div>
         <div class="form_right">
             <input bind:value={element.id} type="text" />
         </div>
     </div>
 
     <div class="form_element">
-        <div class="form_left">element name</div>
+        <div class="form_left">{dictionary.element_name}</div>
         <div class="form_right">
             <input bind:value={element.name} type="text" />
         </div>
@@ -84,30 +89,30 @@
     <div class="select_type">
         <label class="type_radio">
             <input type="radio" bind:group={element.type} value={"text"} />
-            text
+            {dictionary.text}
         </label>
         <label class="type_radio">
             <input type="radio" bind:group={element.type} value={"number"} />
-            number
+            {dictionary.number}
         </label>
         <label class="type_radio">
             <input type="radio" bind:group={element.type} value={"select"} />
-            select
+            {dictionary.select}
         </label>
         <label class="type_radio">
             <input type="radio" bind:group={element.type} value={"table"} />
-            table
+            {dictionary.table}
         </label>
         <!-- <button type="submit">Submit</button> -->
     </div>
     <button
         on:click={() => move(survey.survey_body, global_index, -1)}
-        disabled={global_index <= 0}>move up</button
+        disabled={global_index <= 0}>{dictionary.move_up}</button
     >
     <button
         on:click={() => move(survey.survey_body, global_index, 1)}
         disabled={global_index >= survey.survey_body.length - 1}
-        >move down</button
+        >{dictionary.move_down}</button
     >
     <!-- </form> -->
 {/if}

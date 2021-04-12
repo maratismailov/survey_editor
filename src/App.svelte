@@ -3,7 +3,7 @@
 
   import Editor from "./pages/Editor.svelte";
   import TemplatesList from "./pages/TemplatesList.svelte";
-  // import { store_survey } from './stores.js';
+  import { store_dictionary } from './stores.js';
   let url = "http://192.168.20.35:8000";
 
   if (location.hostname == "localhost") {
@@ -12,9 +12,16 @@
     url = "https://" + location.host + "/survey-editor";
   }
 
+  if (!window.lng) {
+    window.lng = "ru";
+  }
+
   onMount(async () => {
-    const res = await fetch('https://dev.forest.caiag.kg/ru/rent/taxdescr/getdictionarysurveyeditor');
+    const res = await fetch(
+      "https://dev.forest.caiag.kg/" + window.lng + "/rent/taxdescr/getdictionarysurveyeditor"
+    );
     const dictionary = await res.json();
+    store_dictionary.set(dictionary)
     console.log(dictionary)
   });
 </script>
