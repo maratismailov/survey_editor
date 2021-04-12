@@ -16,7 +16,6 @@
     const unsubscribe2 = store_current_element.subscribe((value) => {
         current_element = value;
     });
-    console.log(current_index)
 </script>
 
 <div on:click={set_current_element} class:selected="{index === current_index && current_element}">

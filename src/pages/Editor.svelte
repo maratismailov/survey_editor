@@ -40,11 +40,9 @@
   const unsubscribe2 = store_dictionary.subscribe((value) => {
     dictionary = value;
   });
-  console.log(dictionary)
 
   const add_field = () => {
     survey.survey_body.push({...blank_element})
-    console.log(blank_element)
     store_survey.set(survey)
   }
 

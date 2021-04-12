@@ -22,7 +22,6 @@
     );
     const dictionary = await res.json();
     store_dictionary.set(dictionary)
-    console.log(dictionary)
   });
 </script>
 
