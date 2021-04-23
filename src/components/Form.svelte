@@ -6,7 +6,7 @@
   export let element;
   export let column;
   export let blank_column;
-
+  export let blank_initial_field
 
 
   const add_column = () => {
@@ -16,7 +16,7 @@
   };
 </script>
 
-<SurveyForm {survey} />
+<SurveyForm {survey} {blank_initial_field}/>
 
 <hr />
 

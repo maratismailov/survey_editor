@@ -28,7 +28,14 @@
   const blank_survey = {
     name: "",
     survey_id: "",
-    survey_body: []
+    query_text: "",
+    survey_body: [],
+    initial_fields: []
+  }
+
+  const blank_initial_field = {
+    name: "",
+    id: ""
   }
 
   let survey = {...blank_survey}
@@ -99,7 +106,7 @@
 <div>
   <div class="grid-container">
     <div>
-      <Form {survey} {element} {column} {blank_column} />
+      <Form {survey} {element} {column} {blank_column} {blank_initial_field}/>
       <button on:click={add_field}>{dictionary.add_field}</button>
       {#if !is_show_element}
         <button on:click={() => (is_show_element = true)}>show element</button>
