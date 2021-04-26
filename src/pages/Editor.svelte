@@ -34,8 +34,7 @@
   }
 
   const blank_initial_field = {
-    name: "",
-    id: ""
+    name: ""
   }
 
   let survey = {...blank_survey}
@@ -51,10 +50,10 @@
   });
 
   const add_field = () => {
-    survey.survey_body.push({...blank_element})
+    survey.survey_body.push({...blank_element, select: {...blank_element.select}, fields: [...blank_element.fields]})
     store_survey.set(survey)
+    console.log(blank_element)
   }
-
   let surveys = [];
   // export let survey = {
   //   survey_id: "",

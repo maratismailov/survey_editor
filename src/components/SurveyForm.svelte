@@ -16,6 +16,10 @@
       { ...blank_initial_field },
     ];
   };
+  const delete_initial_field = (array, index) => {
+    array.splice(index, 1)
+    survey.initial_fields = survey.initial_fields
+  }
 
   // const add_field = () => {
   //   survey.survey_body.push({...blank_element})
@@ -39,41 +43,53 @@
     <input bind:value={survey.name} type="text" />
   </div>
 </div>
-
-<button on:click={add_initial_field}>{dictionary.add_initial_field}</button>
 <hr />
+<button on:click={add_initial_field}>{dictionary.add_initial_field}</button>
+{#each survey.initial_fields as initial_field, index}
+  <!-- <div class="form_element">
+    <div class="form_left">{dictionary.element_id}</div>
+    <div class="form_right">
+      <input bind:value={initial_field.id} type="text" />
+    </div>
+  </div> -->
+
+  <div class="form_element">
+    <div class="form_left">{dictionary.element_name}</div>
+    <div class="form_right">
+      <input style="width:88%" bind:value={initial_field.name} type="text" />
+      <input type="image" img src="assets/icons/trash.svg" class="delete" alt="delete" on:click={delete_initial_field(survey.initial_fields, index)}/>
+    </div>
+  </div>
+{/each}
 <div class="form_element">
   <div class="form_left">{dictionary.query_text}</div>
   <div class="form_right">
     <textarea bind:value={survey.query_text} type="text" />
   </div>
 </div>
-{#each survey.initial_fields as initial_field}
-  <hr />
-  <div class="form_element">
-    <div class="form_left">{dictionary.element_id}</div>
-    <div class="form_right">
-      <input bind:value={initial_field.id} type="text" />
-    </div>
-  </div>
-
-  <div class="form_element">
-    <div class="form_left">{dictionary.element_name}</div>
-    <div class="form_right">
-      <input bind:value={initial_field.name} type="text" />
-    </div>
-  </div>
-{/each}
 
 <style>
   .form_element {
     display: flex;
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .form_left {
     width: 170px;
   }
   .form_right {
     flex-grow: 1;
+    width: 300px;
   }
-  textarea { height: 200px; }
+  textarea {
+    height: 200px;
+    width: 100%;
+  }
+  .delete {
+		background-color: orange;
+		size: 12px;
+		vertical-align: bottom;
+	}
 </style>

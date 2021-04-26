@@ -83,7 +83,7 @@
             <TableForm {element} {blank_element} />
         {/if}
         {#if element.type == "select"}
-            <SelectForm {element} />
+            <SelectForm {element} {blank_element} />
         {/if}
     </div>
     <div class="select_type">
@@ -102,6 +102,14 @@
         <label class="type_radio">
             <input type="radio" bind:group={element.type} value={"table"} />
             {dictionary.table}
+        </label>
+        <label class="type_radio">
+            <input type="radio" bind:group={element.type} value={"coordinates"} />
+            {dictionary.coordinates}
+        </label>
+        <label class="type_radio">
+            <input type="radio" bind:group={element.type} value={"photo"} />
+            {dictionary.photo}
         </label>
         <!-- <button type="submit">Submit</button> -->
     </div>

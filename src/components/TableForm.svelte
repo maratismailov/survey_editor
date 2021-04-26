@@ -5,8 +5,9 @@
     export let blank_element;
 
     const add_column = () => {
-        element.fields = [...element.fields, {...blank_element}];
+        element.fields = [...element.fields, {...blank_element, select: {...blank_element.select}, fields: [...blank_element.fields]}];
     };
+    console.log(element.fields)
 </script>
 
 <div>fields:</div>
