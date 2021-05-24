@@ -17,6 +17,7 @@
     type: "",
     value: "",
     fields: [],
+    select_values: [],
     select: {
       table_name: "",
       name_column: "",
