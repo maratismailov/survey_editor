@@ -2,22 +2,28 @@
   import Form from "../components/Form.svelte";
   import CurrentElement from "../components/CurrentElement.svelte";
 
-  import { store_blank_element, store_survey, store_dictionary } from "../stores.js";
+  import {
+    store_blank_element,
+    store_survey,
+    store_dictionary,
+  } from "../stores.js";
   import { store_current_element } from "../stores.js";
 
-  export let url
+  export let url;
 
   let is_show_survey = false;
   let is_show_element = false;
-  let dictionary
+  let dictionary;
 
   const blank_element = {
     id: "new field",
     name: "",
     type: "",
     value: "",
+    object_code: "",
     fields: [],
     select_values: [],
+    selected: "",
     select: {
       table_name: "",
       name_column: "",
@@ -31,16 +37,16 @@
     survey_id: "",
     query_text: "",
     survey_body: [],
-    initial_fields: []
-  }
+    initial_fields: [],
+  };
 
   const blank_initial_field = {
-    name: ""
-  }
+    name: "",
+  };
 
-  let survey = {...blank_survey}
+  let survey = { ...blank_survey };
 
-  store_survey.set(survey)
+  store_survey.set(survey);
 
   const unsubscribe = store_survey.subscribe((value) => {
     survey = value;
@@ -51,18 +57,20 @@
   });
 
   const add_field = () => {
-    survey.survey_body.push({...blank_element, select: {...blank_element.select}, fields: [...blank_element.fields]})
-    store_survey.set(survey)
-    console.log(blank_element)
-  }
+    survey.survey_body.push({
+      ...blank_element,
+      select: { ...blank_element.select },
+      fields: [...blank_element.fields],
+    });
+    store_survey.set(survey);
+    console.log(blank_element);
+  };
   let surveys = [];
   // export let survey = {
   //   survey_id: "",
   //   name: "",
   //   survey_body: [],
   // };
-
-
 
   store_blank_element.set(blank_element);
 
@@ -78,20 +86,15 @@
   };
   let column = { ...blank_column };
 
-
-
   const save_survey_template = async () => {
     try {
-      await fetch(
-        url + `/save_survey_template?id=` + survey.survey_id,
-        {
-          method: "POST", // или 'PUT'
-          body: JSON.stringify(survey),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await fetch(url + `/save_survey_template?id=` + survey.survey_id, {
+        method: "POST", // или 'PUT'
+        body: JSON.stringify(survey),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (error) {
       console.error("Ошибка:", error);
     }
@@ -100,13 +103,12 @@
     surveys.push(survey);
     localStorage.setItem("surveys", JSON.stringify(surveys));
   };
-
 </script>
 
 <div>
   <div class="grid-container">
     <div>
-      <Form {survey} {element} {column} {blank_column} {blank_initial_field}/>
+      <Form {survey} {element} {column} {blank_column} {blank_initial_field} />
       <button on:click={add_field}>{dictionary.add_field}</button>
       {#if !is_show_element}
         <button on:click={() => (is_show_element = true)}>show element</button>
@@ -121,7 +123,9 @@
         <button on:click={() => (is_show_survey = false)}>hide survey</button>
       {/if}
       <button on:click={save_survey}>save survey</button>
-      <button on:click={save_survey_template}>{dictionary.save_survey_template}</button>
+      <button on:click={save_survey_template}
+        >{dictionary.save_survey_template}</button
+      >
       <!-- <button on:click={delete_survey}>delete survey</button> -->
 
       {#if is_show_element}

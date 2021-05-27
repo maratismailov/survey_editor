@@ -43,6 +43,12 @@
     <input bind:value={survey.name} type="text" />
   </div>
 </div>
+<div class="form_element">
+  <div class="form_left">{dictionary.object_code}</div>
+  <div class="form_right">
+    <input bind:value={survey.object_code} type="text" />
+  </div>
+</div>
 <hr />
 <button on:click={add_initial_field}>{dictionary.add_initial_field}</button>
 {#each survey.initial_fields as initial_field, index}
