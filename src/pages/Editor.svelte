@@ -20,7 +20,7 @@
     name: "",
     type: "",
     value: "",
-    object_code: "",
+    center: [],
     fields: [],
     select_values: [],
     selected: "",
@@ -35,9 +35,13 @@
   const blank_survey = {
     name: "",
     survey_id: "",
-    query_text: "",
+    objects_query_text: "",
+    bounds_query_text: "",
     survey_body: [],
     initial_fields: [],
+    object_code: "",
+    geom_field: "",
+    geom_type: "",
   };
 
   const blank_initial_field = {

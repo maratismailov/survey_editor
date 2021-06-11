@@ -18,7 +18,7 @@
 
   onMount(async () => {
     const res = await fetch(
-      "https://dev.forest.caiag.kg/" +
+      "https://forest.caiag.kg/" +
         window.lng +
         "/rent/taxdescr/getdictionarysurveyeditor"
     );
