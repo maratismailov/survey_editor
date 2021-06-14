@@ -7,7 +7,7 @@
     store_survey,
     store_dictionary,
   } from "../stores.js";
-  import { store_current_element } from "../stores.js";
+  import { store_current_element, store_current_index} from "../stores.js";
 
   export let url;
 
@@ -67,7 +67,8 @@
       fields: [...blank_element.fields],
     });
     store_survey.set(survey);
-    console.log(blank_element);
+    store_current_element.set(survey.survey_body[survey.survey_body.length - 1])
+    store_current_index.set(survey.survey_body.length - 1)
   };
   let surveys = [];
   // export let survey = {

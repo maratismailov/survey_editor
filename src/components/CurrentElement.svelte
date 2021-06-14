@@ -67,7 +67,7 @@
     <div class="form_element">
         <div class="form_left">{dictionary.element_id}</div>
         <div class="form_right">
-            <input bind:value={element.id} type="text" />
+            <input bind:value={element.id} on:input={() => store_survey.set(survey)} type="text" />
         </div>
     </div>
 
