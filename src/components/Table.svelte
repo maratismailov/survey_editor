@@ -13,7 +13,7 @@
 </style>
 
 <div class="table">
-  {#each element.fields as element}
+  {#each element.fields[0] as element}
     <!-- <div>{element.id}</div> -->
     <div>{element.name}</div>
     {#if element.type === 'text'}

@@ -21,7 +21,7 @@
     type: "",
     value: "",
     center: [],
-    fields: [],
+    fields: [[]],
     select_values: [],
     selected: "",
     select: {
