@@ -113,7 +113,7 @@
 <div>
   <div class="grid-container">
     <div>
-      <Form {survey} {element} {column} {blank_column} {blank_initial_field} />
+      <Form {survey} {blank_initial_field} />
       <button on:click={add_field}>{dictionary.add_field}</button>
       {#if !is_show_element}
         <button on:click={() => (is_show_element = true)}>show element</button>
